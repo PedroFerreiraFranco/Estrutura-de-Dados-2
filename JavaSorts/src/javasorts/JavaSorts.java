@@ -10,8 +10,22 @@ public class JavaSorts {
     static int menuEntrada(){
         Scanner scanner = new Scanner(System.in);
         int op;
+        System.out.println("\n\n");
         System.out.println("1-Gerar dados");
         System.out.println("2-Entrar com dados");
+        op = scanner.nextInt();
+        return op;
+    }
+
+        static int menuOpcoes(){
+        Scanner scanner = new Scanner(System.in);
+        int op;
+        System.out.println("\n\n");
+        System.out.println("1-bSort");
+        System.out.println("2-bSortComentado");
+        System.out.println("3-sSortComentado");
+        System.out.println("4-iSort");
+        System.out.println("5-iSortComentado"); 
         op = scanner.nextInt();
         return op;
     }
@@ -19,7 +33,7 @@ public class JavaSorts {
     public static void main(String[] args) {
        Scanner scanner = new Scanner(System.in);
        Random rand = new Random();
-        int tamanho, op;
+        int tamanho, op, opMenu;
         System.out.println("Tamanho do vetor: ");
         tamanho = scanner.nextInt();
         int[] vetor = new int [tamanho];
@@ -37,15 +51,49 @@ public class JavaSorts {
             break;
         }//fim switch
         
-        System.out.println("Vetor original: ");
-        printArray(vetor);
-        //BubbleSort.bSortDescComentado(vetor);
-        //BubbleSort.bSort(vetor);
-        //SelectionSort.sSortComentado(vetor);
-        //InsertionSort.iSort(vetor);
-        //InsertionSort.iSortComentado(vetor);
-        System.out.println("Vetor Ordenado: ");
-        printArray(vetor);
+        opMenu = menuOpcoes();
+        switch(opMenu){
+            case 1:         
+                System.out.println("Vetor original: ");
+                printArray(vetor);
+                BubbleSort.bSort(vetor);
+                System.out.println("Vetor Ordenado: ");
+                printArray(vetor); 
+            break;
+            
+            case 2:
+                System.out.println("Vetor original: ");
+                printArray(vetor);
+                BubbleSort.bSortDescComentado(vetor);
+                System.out.println("Vetor Ordenado: ");
+                printArray(vetor); 
+            break;
+            
+            case 3:
+                System.out.println("Vetor original: ");
+                printArray(vetor);
+                SelectionSort.sSortComentado(vetor);
+                System.out.println("Vetor Ordenado: ");
+                printArray(vetor);       
+            break;    
+            
+            case 4:
+                System.out.println("Vetor original: ");
+                printArray(vetor);
+                InsertionSort.iSort(vetor);
+                System.out.println("Vetor Ordenado: ");
+                printArray(vetor);       
+            break;    
+            
+            case 5:
+                System.out.println("Vetor original: ");
+                printArray(vetor);
+                InsertionSort.iSortComentado(vetor);
+                System.out.println("Vetor Ordenado: ");
+                printArray(vetor);       
+            break;    
+        }
+        
     }
     
     public static void printArray(int array[]){
