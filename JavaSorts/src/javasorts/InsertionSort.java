@@ -5,14 +5,18 @@ import java.util.Scanner;
 
 
 public class InsertionSort {
+    public static long compara=0, deslocamento=0;
     private static void insert(int array[], int i){
         int eleito = array[i];
         int comp = i-1;
         while(comp>=0 && eleito<array[comp]){
+            compara++;//comparando
             //deslocar
             array[comp+1] = array[comp];
+            deslocamento++;
             comp--;
         }//fim while
+        compara++;//conta a comnparação de saída
         array[comp+1] = eleito;
     }//fim insert
     
