@@ -2,10 +2,6 @@ package revisao1;
 
 import java.util.Scanner;
 
-/**
- *
- * @author luizh
- */
 public class SelectionSortChar {
     
     public static long compara = 0, troca = 0;
