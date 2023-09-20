@@ -1,4 +1,5 @@
 package javasort;
+import java.awt.Rectangle;
 import java.io.*;
 import java.util.*;
 import javax.swing.JOptionPane;
@@ -8,13 +9,15 @@ public class FormSistema extends javax.swing.JFrame {
     ArrayList<Dados> lista = new ArrayList<>();
    // Definir os comparadores
 
-  Comparator<Dados> comparaMaisNovo = (Dados d1, Dados d2) -> d1.getYear()- d2.getYear();
+  Comparator<Dados> comparaMaisNovo = (Dados d1, Dados d2) -> d2.getYear()- d1.getYear();
   
-  Comparator<Dados> comparaMaisCaro = (Dados d1, Dados d2) -> d2.getSelling_price()- d1.getSelling_price();
+  Comparator<Dados> comparaMaisRodado = (Dados d1, Dados d2) -> d2.getKm_driven()-d1.getKm_driven();
   
   Comparator<Dados> comparaMaisBarato = (Dados d1, Dados d2) -> d1.getSelling_price()- d2.getSelling_price();
   
-  Comparator<Dados> comparaMaisRodado = (Dados d1, Dados d2) -> d2.getKm_driven() - d1.getKm_driven();
+  Comparator<Dados> comparaMaisCaro = (Dados d1, Dados d2) -> d2.getSelling_price()- d1.getSelling_price();
+  
+  Comparator<Dados> comparaNome = (Dados d1, Dados d2) -> d1.getName().compareTo(toString())-d2.getName().compareTo(toString());
 
   
     public FormSistema() {
@@ -46,13 +49,15 @@ public class FormSistema extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 51));
+        jPanel1.setBackground(new java.awt.Color(255, 51, 51));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1114, 300));
 
         lblProx.setFont(new java.awt.Font("Segoe UI Black", 0, 36)); // NOI18N
         lblProx.setForeground(new java.awt.Color(255, 255, 255));
-        lblProx.setText("Sistema de Informações Climáticas da Amazônia");
+        lblProx.setText("Sistema de Informações Sobre Motos");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javasort/clima-quente.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javasort/motorbike (1).png"))); // NOI18N
+        jLabel2.setPreferredSize(new java.awt.Dimension(524, 300));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -61,9 +66,9 @@ public class FormSistema extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel1)
-                .addGap(36, 36, 36)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(115, 115, 115)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblProx, javax.swing.GroupLayout.PREFERRED_SIZE, 890, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -71,16 +76,16 @@ public class FormSistema extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 109, Short.MAX_VALUE)
+                .addComponent(lblProx, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblProx, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(73, 73, 73))
         );
 
         btnBinario.setBackground(new java.awt.Color(255, 255, 255));
@@ -120,7 +125,7 @@ public class FormSistema extends javax.swing.JFrame {
         buttonGroup1.add(rbBinario);
         rbBinario.setText("Binário");
 
-        cbOrdena.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mais Novo", "Mais Caro", "Mais Barato", "Menos Rodado" }));
+        cbOrdena.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mais Novo", "Mais Rodado", "Mais Barato", "Mais Caro", "Ordenar por Nome" }));
 
         javax.swing.GroupLayout btnBinarioLayout = new javax.swing.GroupLayout(btnBinario);
         btnBinario.setLayout(btnBinarioLayout);
@@ -145,7 +150,7 @@ public class FormSistema extends javax.swing.JFrame {
                             .addComponent(btnOrdNome, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbOrdena, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(18, Short.MAX_VALUE))))
         );
         btnBinarioLayout.setVerticalGroup(
             btnBinarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,7 +171,7 @@ public class FormSistema extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnBusca))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(222, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -176,10 +181,8 @@ public class FormSistema extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnBinario, javax.swing.GroupLayout.PREFERRED_SIZE, 1136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1169, Short.MAX_VALUE)
+                    .addComponent(btnBinario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,7 +190,7 @@ public class FormSistema extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBinario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(251, Short.MAX_VALUE))
         );
 
         pack();
@@ -205,18 +208,12 @@ public class FormSistema extends javax.swing.JFrame {
                 
                 motos.setName(leitura[0]);
                 
-                if (!leitura[1].isEmpty()) {
-                    motos.setYear(Integer.parseInt(leitura[1]));
-                }
+                motos.setYear(Integer.parseInt(leitura[1]));
                 
-                if (!leitura[2].isEmpty()) {
-                    motos.setSelling_price(Integer.parseInt(leitura[2]));
-                }
+                motos.setSelling_price(Integer.parseInt(leitura[2]));
                 
-                if (!leitura[3].isEmpty()) {
-                    motos.setKm_driven(Integer.parseInt(leitura[3]));
-                }
-                
+                motos.setKm_driven(Integer.parseInt(leitura[3]));
+                                
                 motos.setFuel(leitura[4]);
 
                 /*System.out.println(leitura[0]+"\n");
@@ -246,10 +243,6 @@ public class FormSistema extends javax.swing.JFrame {
             rowData[2] = d.getSelling_price();
             rowData[3] = d.getKm_driven();
             rowData[4] = d.getFuel();
-            rowData[5] = d.getSeller_type();
-            rowData[6] = d.getTransmission();
-            rowData[7] = d.getOwner();
-            System.out.println("Mais antigo:"+d.getYear()+"\n");
             model.addRow(rowData);
         }// fim preenche modelo
     }// fim mostra
@@ -266,38 +259,76 @@ public class FormSistema extends javax.swing.JFrame {
                lista.sort(comparaMaisNovo);
            break;
            
+           case 1: 
+               lista.sort(comparaMaisRodado);
+           break;
+           
            case 2: 
+               lista.sort(comparaMaisBarato);
+           break;
+
+            case 3: 
                lista.sort(comparaMaisCaro);
            break;
            
-           case 3: 
-               lista.sort(comparaMaisNovo);
+           case 4: 
+               lista.sort(comparaNome);
            break;
 
-            case 4: 
-               lista.sort(comparaMaisRodado);
-           break;
-
-           
        }
        mostra();
     }//GEN-LAST:event_btnOrdNomeActionPerformed
 
     private void btnBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaActionPerformed
+        
         Dados dadoBusca = new Dados();
+        
         dadoBusca.setName(txtBusca.getText());
+        int comp = 0;
         int r = - 1;
         
-        if(rbLinear.isSelected()){
-            r = lista.indexOf(dadoBusca);
+        if(rbLinear.isSelected()) {
+            for (int i = 0; i < lista.size(); i++) {            
+                comp++;
+                Dados moto = lista.get(i);
+                if (moto.getName().equals(dadoBusca.getName())) {
+                    r = i; 
+                    break; 
+                }
+            }
+        }else if(rbBinario.isSelected()) {
+            int left = 0;
+            int right = lista.size() - 1;
+
+            while (left <= right) {
+                int middle = (left + right) / 2;
+                Dados moto = lista.get(middle);
+                comp++;
+
+                int comparison = moto.getName().compareTo(dadoBusca.getName());
+
+                if (comparison == 0) {
+                    r = middle;
+                    break;
+                } else if (comparison < 0) {
+                    left = middle + 1;
+                } else {
+                    right = middle - 1;
+                }
+            }
         }
-        else if(rbBinario.isSelected()){
-            r = Collections.binarySearch(lista, dadoBusca);
+        int rowIndex = r;
+        if (rowIndex != -1) {
+            tabelaDados.setRowSelectionInterval(rowIndex, rowIndex);
+            Rectangle cellRect = tabelaDados.getCellRect(rowIndex, 0, true); 
+            tabelaDados.scrollRectToVisible(cellRect); 
         }
-        if(r==-1)
+        if(r==-1){
             JOptionPane.showMessageDialog(null,"Não encontrado: "+ r);
-        else
-            JOptionPane.showMessageDialog(null,"Encontrado, index: "+ r);
+        }else{
+            JOptionPane.showMessageDialog(null, "Encontrado, index: " + r);
+            JOptionPane.showMessageDialog(null, "Número de comparações: " + comp);                 
+            }
     }//GEN-LAST:event_btnBuscaActionPerformed
 
     /**
